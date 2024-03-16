@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField]
+    private float speed = 10f;
+
+    [SerializeField]
+    private Rigidbody rb;
+
+    private void Update() {
+        CheckInputs();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CheckInputs()
     {
-        
+        var horizontalInput = Input.GetAxis("Horizontal");
+        var verticalInput = Input.GetAxis("Vertical");
+        var forceVector = new Vector3(horizontalInput * speed, 0, verticalInput * speed);
+        rb.AddForce(forceVector);
     }
 }
